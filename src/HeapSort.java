@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Heapify {
+public class HeapSort {
 	public static void main(String[] args){
 		Scanner p = new Scanner(System.in);
 		int size= p.nextInt();
@@ -11,12 +11,13 @@ public class Heapify {
 		for(int i=0; i<values.length;i++){
 			a[i]=Integer.parseInt(values[i]);
 		}
-		for(int r=(size-2)/2; r>=0; r--)
-			downHeap(r, size, a);
+		
 		for (int i = size-1; i>0; i--) { 
 			swapArrayElements(a, i, 0);
 			downHeap(0, i, a); 
 }
+		for(int r=(size-2)/2; r>=0; r--)
+			downHeap(r, size, a);
 		for(int i=0 ; i<a.length ; i++){
 			System.out.print(a[i] + " ");
 		}
