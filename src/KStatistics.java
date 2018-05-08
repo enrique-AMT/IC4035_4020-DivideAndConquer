@@ -13,21 +13,34 @@ public class KStatistics {
 		for(int i=0; i<values.length;i++){
 			a[i]=Integer.parseInt(values[i]);
 		}
-		qs(0, size-1, a);
-		System.out.println(a[k-1]);
+		System.out.println(quickselect(a, 0, a.length-1, k));
 
 	}
-	
-	
-private static void qs(int first, int last, int[] elements) {
-		
-		if(first<last){
-			int partition= partitionList(first, last, elements);
-			qs(first, partition-1, elements);
-			qs(partition+1, last, elements);
-		}
-	
+	public static Integer quickselect(int[] list, int leftIndex, int rightIndex, int k) {
+        // Edge case
+        if (k < 1 || k > list.length) {
+            return null;
+        }
+
+        // Base case
+        if (leftIndex == rightIndex) {
+            return list[leftIndex];
+        }
+
+        // Partition the sublist into two halves
+        int pivotIndex = partitionList(leftIndex, rightIndex, list);
+        int sizeLeft = pivotIndex - leftIndex + 1;
+
+        if (sizeLeft == k) {
+            return list[pivotIndex];
+        } else if (sizeLeft > k) {
+            return quickselect(list, leftIndex, pivotIndex - 1, k);
+        } else {
+            return quickselect(list, pivotIndex + 1, rightIndex, k - sizeLeft);
+        }
+        
 	}
+
 	private static int partitionList(int first, int last, int[] elements) { 
 		Integer pivot = elements[last]; 
 		int left = first, right = last-1; 
